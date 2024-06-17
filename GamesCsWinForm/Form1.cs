@@ -17,7 +17,35 @@ namespace GamesCsWinForm
         public Form1()
         {
             InitializeComponent();
+            pictureBox1.MouseDown += MouseDownClicK;
+            pictureBox1.MouseUp += MouseUpClicK;
+            pictureBox1.MouseMove += MouseMoveClicK;
+            pictureBox3.MouseDown += MouseDownClicK;
+            pictureBox3.MouseUp += MouseUpClicK;
+            pictureBox3.MouseMove += MouseMoveClicK;
+
+
         }
+        private void MouseDownClicK(object sender, MouseEventArgs e)
+        {
+            dragging = true;
+            point = e.Location;
+            
+        }
+        private void MouseMoveClicK(object sender, MouseEventArgs e)
+        {
+            if (dragging)
+            { 
+             Point corPoint=PointToScreen(new Point(e.X, e.Y));
+                this.Location = new Point(corPoint.X-point.X, corPoint.Y-point.Y+pictureBox1.Top);
+            }
+        }
+        private void MouseUpClicK(object sender, MouseEventArgs e)
+        {
+            dragging = false;
+
+        }
+
 
         private void Form1_KeyPress(object sender, KeyPressEventArgs e)
         {
